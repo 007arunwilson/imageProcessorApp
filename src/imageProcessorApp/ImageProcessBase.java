@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
 
 
 public class ImageProcessBase {
@@ -22,7 +23,15 @@ public class ImageProcessBase {
 	    	
 	    	File image_file = new File(current_input_file_path);
 	    	
-	    	com.drew.metadata.Metadata metadata = ImageMetadataReader.readMetadata(image_file);
+	    	try {
+				com.drew.metadata.Metadata metadata = ImageMetadataReader.readMetadata(image_file);
+			} catch (ImageProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    	
 //	        Directory directory = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
 //	        JpegDirectory jpegDirectory = metadata.getFirstDirectoryOfType(JpegDirectory.class);
